@@ -98,13 +98,13 @@ function useProducts(workspaceId: string | undefined) {
       });
   };
 
-  const AddCategories = (name: string) => {
+  const addCategories = (name: string) => {
     adminApi.post('/product-category', { name, workspaceId }).catch((error) => {
       console.error('Failed to add products categories : ', error);
     });
   };
 
-  return { fetchProducts, addProduct, fetchCategories, AddCategories, deleteProducts, fetchProduct, editProduct };
+  return { fetchProducts, addProduct, fetchCategories, addCategories, deleteProducts, fetchProduct, editProduct };
 }
 
 export default useProducts;

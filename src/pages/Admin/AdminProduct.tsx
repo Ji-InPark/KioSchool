@@ -7,7 +7,7 @@ import useCustomNavigate from '@hooks/useCustomNavigate';
 
 function AdminProduct() {
   const { workspaceId } = useParams<{ workspaceId: string }>();
-  const { fetchProducts, AddCategories, deleteProducts } = useProducts(workspaceId);
+  const { fetchProducts, addCategories, deleteProducts } = useProducts(workspaceId);
   const products = useRecoilValue(productsAtom);
   const { appendPath } = useCustomNavigate();
   const [input, setInput] = useState<string>('');
@@ -34,6 +34,15 @@ function AdminProduct() {
     setSelectedProductIds(updatedProducts);
   };
 
+  const addCategoriesHandler = (categorieInput: string) => {
+    if (!categorieInput) {
+      alert('카테고리를 입력해주세요');
+      return;
+    }
+    setInput('');
+    addCategories(categorieInput);
+  };
+
   return (
     <>
       <div>상품 조회</div>
@@ -46,7 +55,7 @@ function AdminProduct() {
       />
       <button
         onClick={() => {
-          AddCategories(input);
+          addCategoriesHandler(input);
         }}
       >
         카테고리 추가
